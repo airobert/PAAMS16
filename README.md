@@ -1,6 +1,6 @@
 This is my code for the paper submitted to PAAMS 
 
-The project was a part of the course Dynamic Epistemic Learning Course
+The project was a part of the course Dynamic Epistemic Learning at ILLC
 
 Robert White (Shuai Wang): ai.robert.wangshuai@gmail.com
 
