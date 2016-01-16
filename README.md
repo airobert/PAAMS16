@@ -2,7 +2,6 @@ This is my code for the paper submitted to PAAMS
 
 The project was a part of the course Dynamic Epistemic Learning at ILLC
 
-Robert White (Shuai Wang): ai.robert.wangshuai@gmail.com
 
 In case of confusion:
 
@@ -40,3 +39,7 @@ or
 and for demand-oriented testings, type:
 
 	./main 3 (the domain is hard-coded to 100)
+
+
+
+Robert White (Shuai Wang): ai.robert.wangshuai@gmail.com
