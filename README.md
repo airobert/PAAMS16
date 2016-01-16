@@ -1,6 +1,7 @@
-Dynamic Epistemic Learning Course
+This is my code for my paper submitted to PAAMS 
+the project was a part of the course Dynamic Epistemic Learning Course
 
-Robert White: ai.robert.wangshuai@gmail.com
+Robert White (Shuai Wang): ai.robert.wangshuai@gmail.com
 
 In case of confusion:
 
@@ -11,9 +12,13 @@ To use:
 
 1) You need BuDDy.
 
-2) Compile Smodels as described.
+2) Compile Smodels using 
+	
+	make
 
-2) Go to the mas directory and type:
+	make install
+
+2) Go to the ./mas directory and type:
 
 	make main
 	
