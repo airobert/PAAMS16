@@ -1,4 +1,7 @@
-// basic file operations
+// This is a prototype implementation of the learning module of L-PANTS
+// Tab size: 2
+// Author: Robert White (Shuai Wang)
+// Institute: ILLC, UvA
 #include <iostream>
 #include <stdio.h>
 #include <time.h> 
@@ -8,25 +11,19 @@
 #include <algorithm>
 #include <cmath> 
 #include <exception>
-
 #include "smodels.h"
 #include "api.h"
 #include "atomrule.h"
-
 #include <ctime>
-
 #include <bdd.h>
 
-
-
-// #include "enviroment.h"
 
 using namespace std;
 
 typedef list<int> condition;
 typedef list<int> world;
 
-
+// the name attribute is not used in these test
 struct action {
 	string name;
 	condition pre;
@@ -40,6 +37,7 @@ struct safe_action
 	condition post;
 };
 
+// In this project we consider only events of one action. Mixed events will be considered later
 struct event
 {
 	condition before;
@@ -61,6 +59,7 @@ bool abs_compare (int x, int y){
 		else return true;
 };
 
+// get a list of random numbers from 0 to n without repetition (not even the its negation)
 condition get_pre_condition (int n, int s) { 
 	condition l;
 	// get a random length < n
@@ -78,6 +77,7 @@ condition get_pre_condition (int n, int s) {
 	return l;
 };
 
+// a before-world is implemented the same as a precondition.
 world get_before_world (int domain){
 	return (get_pre_condition(domain, domain));
 
@@ -155,6 +155,7 @@ bool action_validity (action a, world w) {
 	return result;
 };
 
+// The postcondition of an action will be included in an action after it got performed
 world perform_action (action a, world w) {
 	// since this is a simple implementation, the validity is expected to be checked
 	world after;
@@ -171,6 +172,7 @@ world perform_action (action a, world w) {
 	return after;
 };
 
+// the precondition of the action is included in the generated world
 world generate_world_from_action(action a, int size){
 	
 	world after;
@@ -595,7 +597,7 @@ bdd encode_world_bdd (condition c){
 }
 
 
-
+// the learning function of action learning with precondition
 int full_action_learning (int domain, action act)
 {
 	Smodels smodels;
@@ -801,7 +803,8 @@ void eval2(int total){
 }
 
 
-//---------demand-oriented testings
+//---------demand-oriented testings------
+// this test is about fixing a demand and see how the effeciency change as we increase the active power 
 conditional_effe_section effeciency_section_demand_conditional (int domain, int demand, int min, int max, int repeat){
 
 
@@ -868,7 +871,7 @@ void test_demand_and_print (int domain, int step, int repeat){
 }
 
 void test_demand(){
-	//colorful
+	// test with a fixed deman (the colorful fig)
 	test_demand_and_print(100, 10, 20);
 }
 
@@ -880,10 +883,12 @@ int main (int argc, char * argv[]) {
 	if (argc == 1) cout <<"See the README file for instructiions." <<endl;
 	
 	int eval = atoi(argv[1]);
+	// enter evaluation one: action learning without precondition
 	if (eval == 1){
 		int total = atoi(argv[2]);
 		eval1(total);
 	}else if (eval == 2){
+		// evaluation two: conitional action learning
 		int total = atoi(argv[2]);
 		eval2(total);
 	}else if (eval == 3){
