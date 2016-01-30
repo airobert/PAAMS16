@@ -438,7 +438,7 @@ struct effe_section
 	int section_min;
 	int section_max;
 	double average_time;
-	int iterations;
+	double iterations;
 	/* data */
 };
 
@@ -446,7 +446,7 @@ struct effe_section
 effe_section effeciency_section_test(int domain, int min, int max, int repeat){
 
 
-	int iteration_acc = 0;
+	double iteration_acc = 0.0;
  	double time_acc = 0.0;
 
   for (int i = 0; i < repeat; i ++){
@@ -512,7 +512,8 @@ void eval1(int total){
 		i = (*index).begin();
 		cout << i->domain; 
 		for(; i != (*index).end(); i++){
-			cout<< " & "<< i->average_time << "/" << i->iterations;
+			// cout<< " & "<< i->average_time << "/" << i->iterations;
+			printf (" & %.3f/%.1f", i->average_time, i->iterations );
 		}
 		cout <<" \\\\ \\hline" <<endl;
 		index ++;
@@ -540,12 +541,13 @@ void eval1(int total){
 		list<effe_section>::iterator i;
 		i = (*index).begin();
 		cout << "(" << i->domain; 
-		int average_iter = 0;
+		double average_iter = 0.0;
 		for(; i != (*index).end(); i++){
 			average_iter += i->iterations;
 		}
 		average_iter = average_iter / sections;
-		cout << " , " << average_iter << ") " <<endl;
+		// cout << " , " << average_iter << ") " <<endl;
+		printf (" , %.1f)\n", average_iter);
 		index ++;
 	}
 
@@ -562,7 +564,7 @@ struct conditional_effe_section
 	int section_min;
 	int section_max;
 	double average_time;
-	int iterations;
+	double iterations;
 };
 
 
@@ -683,7 +685,7 @@ int full_action_learning (int domain, action act)
 
 conditional_effe_section effeciency_section_active_conditional (int domain, int min, int max, int repeat){
 
-	int iteration_acc = 0;
+	double iteration_acc = 0;
  	double time_acc = 0.0;
 
   for (int i = 0; i < repeat; i ++){
@@ -762,7 +764,8 @@ void eval2(int total){
 		i = (*index).begin();
 		cout << i->domain; 
 		for(; i != (*index).end(); i++){
-			cout<< " & "<< i->average_time << "/" << i->iterations;
+			// cout<< " & "<< i->average_time << "/" << i->iterations;
+			printf (" & %.3f/%.1f", i->average_time, i->iterations );
 		}
 		cout <<" \\\\ \\hline" <<endl;
 		index ++;
@@ -779,7 +782,8 @@ void eval2(int total){
 			average_time += i->average_time;
 		}
 		average_time = average_time / sections;
-		cout << " , " << average_time << ") " <<endl;
+		// cout << " , " << average_time << ") " <<endl;
+		printf(" , %.3f) \n", average_time);
 		index ++;
 	}
 
@@ -790,12 +794,13 @@ void eval2(int total){
 		list<conditional_effe_section>::iterator i;
 		i = (*index).begin();
 		cout << "(" << i->domain; 
-		int average_iter = 0;
+		double average_iter = 0.0;
 		for(; i != (*index).end(); i++){
 			average_iter += i->iterations;
 		}
 		average_iter = average_iter / sections;
-		cout << " , " << average_iter << ") " <<endl;
+		// cout << " , " << average_iter << ") " <<endl;
+		printf(" , %.1f)\n", average_iter);
 		index ++;
 	}
 
@@ -808,7 +813,7 @@ void eval2(int total){
 conditional_effe_section effeciency_section_demand_conditional (int domain, int demand, int min, int max, int repeat){
 
 
-	int iteration_acc = 0;
+	double  iteration_acc = 0.0;
  	double time_acc = 0.0;
 
   for (int i = 0; i < repeat; i ++){
@@ -864,10 +869,13 @@ void test_demand_and_print (int domain, int step, int repeat){
 		cout<< "The domain is: " << i->domain
 		<< "\tThe demand is: " << i->demand 
 		<< "\tthe (postcondition) range is:" << i->section_min
-		<< "\t to \t" << i->section_max
-		<< "\tThe average time: " << i->average_time 
-		<< "\tThe average N.iteration: " << i->iterations <<endl;
+		<< "\t to \t" << i->section_max;
+		printf ("\tThe average time: %.3f ", i->average_time);
+		// << "\tThe average time: " << i->average_time ;
+		printf ("\tThe average N.iter: %.1f\n", i->iterations);
+		// << "\tThe average N.iteration: " << i->iterations <<endl;
 	}
+	cout<<endl;
 }
 
 void test_demand(){
